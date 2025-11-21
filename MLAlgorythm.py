@@ -2,12 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sleepML import data
-data = data.getdata
+from Get_sleep_data import data
+
+data = data.getdata()
 
 
 num_samples = len(data)
-num_variables = 12
+num_variables = 11
 # 2. Split Data into Training and Testing Sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
