@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from Get_sleep_data import data
 
-sdata = data.getdata()
+sdata = data.get_data()
 
 
 num_samples = len(sdata)
