@@ -57,24 +57,29 @@ Medication_Usage = float(input("Medication_Usage (for yes enter 1 and for no ent
 Wake_up_time = 0
 
 sleep_quality_list = []
-for i in np.arange(((Bedtime) + 7)%24, ((Bedtime) + 10)%24, 0.25):
-    Wake_up_time = i
-    User_input_list = [Age, Gender, Bedtime, Wake_up_time, Daily_Steps, Calories_Burned, Physical_Activity_Level, Dietary_Habits, Sleep_Disorders, Medication_Usage]
-    sleep_quality = model.predict([User_input_list])
+times = []
+
+start = (Bedtime + 7) % 24
+end = (Bedtime + 10) % 24
+
+for i in np.arange(start, start + 3, 0.25): 
+    wake_time = i % 24
+    times.append(wake_time)
+
+    User_input_list = [Age, Gender, Bedtime, wake_time, Daily_Steps, Calories_Burned, Physical_Activity_Level, Dietary_Habits, Sleep_Disorders, Medication_Usage]
+
+    sleep_quality = model.predict([User_input_list])[0]
     sleep_quality_list.append(sleep_quality)
-heighest_num = sleep_quality_list[0]
-index = 0
-real_index = 0
-for num in sleep_quality_list:
-    index += 1
-    if num > heighest_num:
-        heighest_num = num
-        real_index = index
-Wake_up_time = ((Bedtime + 7)%24) + (real_index * 0.25)
+
+best_index = np.argmax(sleep_quality_list)
+
+Wake_up_time = times[best_index]
+
 hours = int(Wake_up_time)
-minutes = int(round(Wake_up_time - hours) * 60)
+minutes = int((Wake_up_time - hours) * 60)
+
 if minutes == 60:
     minutes = 0
     hours = (hours + 1) % 24
+
 print(f"Your ideal wake up time is {hours}:{minutes:02d}")
-       
