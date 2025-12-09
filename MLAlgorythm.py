@@ -6,15 +6,18 @@ from Get_sleep_data import data
 
 data1 = data()
 sdatamatrix = data1.get_data()
-sdata = np.column_stack(sdatamatrix)
+columns = list(sdatamatrix.keys())              # preserve consistent ordering
+values = [sdatamatrix[col] for col in columns]  # list of lists (each column)
+ 
+sdata_matrix = np.column_stack(values)
+print(sdata_matrix)
 
-
-num_samples = len(sdata)
+num_samples = len(sdatamatrix)
 num_dep_variables = 11
 
 
 # 2. Split Data into Training and Testing Sets
-data_train, data_test= train_test_split(sdata, test_size=0.1, random_state=42)
+data_train, data_test= train_test_split(sdata_matrix, test_size=0.1, random_state=42)
 
 # 3. Create and Train the Linear Regression Model
 model = LinearRegression()
