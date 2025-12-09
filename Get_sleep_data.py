@@ -87,7 +87,3 @@ class data:
 
         return self.Sleep_data
 
-
-
-
-
