@@ -4,10 +4,14 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from Get_sleep_data import data
 
-sdata = data.get_data()
+data1 = data()
+sdatamatrix = data1.get_data()
+sdata = np.column_stack(sdatamatrix)
+
 
 num_samples = len(sdata)
 num_dep_variables = 11
+
 
 # 2. Split Data into Training and Testing Sets
 data_train, data_test= train_test_split(sdata, test_size=0.1, random_state=42)
