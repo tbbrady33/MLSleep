@@ -1,10 +1,16 @@
 import csv
+import os
+import sys
+
 
 class data:
     def get_data():
 
         sleep_data = []
-        with open("/Users/kmbrady/Desktop/cs111/MLSleep/Health_Sleep_Statistics.csv", newline="") as file:
+        current_dir = os.getcwd()
+        csv_path = os.path.join(current_dir, "Health_Sleep_Statistics.csv")
+
+        with open(csv_path, newline="") as file:
             reader = csv.reader(file)
             for row in reader:
                 sleep_data.append(row)
@@ -24,7 +30,11 @@ Sleep_data = {
     "Medication Usage": []
 
 }
-with open("/Users/kmbrady/Desktop/cs111/MLSleep/Health_Sleep_Statistics.csv", newline="") as f:
+
+current_dir = os.getcwd()
+csv_path = os.path.join(current_dir, "Health_Sleep_Statistics.csv")
+
+with open(csv_path, newline="") as f:
     reader = csv.reader(f)
     next(reader)
     for row in reader:
